@@ -20,6 +20,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1200253916991669');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1200253916991669&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <style>
   :root{
     --cream:#FBF7EC;
@@ -297,12 +316,27 @@
     margin-bottom:20px;
   }
 
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
   .highlight{
     background:rgba(245, 231, 45, 0.28);
     box-decoration-break:clone;
     -webkit-box-decoration-break:clone;
-    padding:0.05em 0.15em;
+    padding:0.1em 0.15em;
     border-radius:3px;
+    font-family:'DM Sans', sans-serif;
+    font-weight:800;
+    font-size:19px;
+    line-height:1.5;
+    letter-spacing:-0.005em;
   }
 
   @keyframes popIn{
@@ -467,6 +501,11 @@
     .date-banner .icon::after{
       animation:none !important;
     }
+    .reveal{
+      opacity:1 !important;
+      transform:none !important;
+      transition:none !important;
+    }
   }
 </style>
 </head>
@@ -510,25 +549,25 @@
   <div class="manifesto">
     <h1>You've known me for the last 8 years as The Jessica Pinili Podcast.</h1>
 
-    <p>But somewhere between building businesses, boarding planes, changing my mind, falling in love, turning 33 and collecting approximately 47 personality upgrades&hellip; I outgrew her.</p>
+    <p class="reveal">But somewhere between building businesses, boarding planes, changing my mind, falling in love, turning 33 and collecting approximately 47 personality upgrades&hellip; I outgrew her.</p>
 
-    <p>So, welcome to the new era.</p>
+    <p class="reveal">So, welcome to the new era.</p>
 
-    <p><span class="highlight">Voice Message, Sent. is basically the voice note I'd send you at 11pm because I need to tell you something before I forget.</span> Business, mindset, relationships, travel, wellness, identity, money, life transitions and whatever else is currently living rent-free in my brain.</p>
+    <p class="reveal"><span class="highlight">Voice Message, Sent. is basically the voice note I'd send you at 11pm because I need to tell you something before I forget.</span> Business, mindset, relationships, travel, wellness, identity, money, life transitions and whatever else is currently living rent-free in my brain.</p>
 
-    <p>Think: the group chat where someone finally says the thing everyone else was thinking.</p>
+    <p class="reveal">Think: the group chat where someone finally says the thing everyone else was thinking.</p>
 
-    <p>I'm 33 now. I've been online for years. I've built things, burnt things down, rebuilt them better, changed cities, changed seasons and changed my mind more times than I can count.</p>
+    <p class="reveal">I'm 33 now. I've been online for years. I've built things, burnt things down, rebuilt them better, changed cities, changed seasons and changed my mind more times than I can count.</p>
 
-    <div class="sticker-row">
+    <div class="sticker-row reveal">
       <span class="sticker blue">wait, say that again</span>
       <span class="sticker tan">sending this to my sister</span>
       <span class="sticker blue">ok but she's right</span>
     </div>
 
-    <p>I don't want this podcast to be about having a perfectly packaged lesson anymore. I just want to say the useful thing out loud, not overthink it, and send it anyway.</p>
+    <p class="reveal">I don't want this podcast to be about having a perfectly packaged lesson anymore. I just want to say the useful thing out loud, not overthink it, and send it anyway.</p>
 
-    <p class="signoff">Welcome to Voice Message, Sent.<br>It's always a short story, long. &#128524;</p>
+    <p class="signoff reveal">Welcome to Voice Message, Sent.<br>It's always a short story, long. &#128524;</p>
   </div>
 
   <div class="subscribe">
@@ -562,5 +601,23 @@
   </div>
 
 </div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('is-visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
 </body>
 </html>
